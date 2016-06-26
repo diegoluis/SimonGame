@@ -1,0 +1,219 @@
+
+// ====================================================================
+// Imports
+// ====================================================================
+@import "bourbon";
+@import "partials/variables";
+@import "partials/normalize";
+//font-family: 'Bungee', cursive;
+html{
+	box-sizing: border-box;
+	background: $darkGreen;
+}
+header h1{
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	font-family: 'Bungee', cursive;
+	font-size: 2.5rem;
+	@media screen and(min-width: 768px){
+		margin: 1%;
+		font-size: 3.5rem;
+	}
+}
+.wrapper div{
+	//border: 1px solid black;
+
+}
+
+.wrapper{
+	margin: 0 auto;
+	width: 90vw;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	@media screen and(min-width: 768px){
+		width: auto;
+	}
+
+}
+//---board---//
+.board{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background: $beige;
+	padding: 2%;
+	border-radius: $radL;
+	margin: 0 auto;
+	margin-top: 3%;
+	width: 90vw;
+	@media screen and(min-width: 768px){
+		width: 50vw;
+		margin-top: 1%;
+		padding-top: 0;
+		border-radius: $radM;
+	}
+}
+.boardInt{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+}
+//--squares---//
+.squares{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 95%;
+	justify-content: space-around;
+	background: $dark;
+	border-radius: $radL;
+	padding: 1.2vw 1vw 1.2vw 1vw;
+	margin: 0 auto;
+	@media screen and(min-width: 768px){
+		width: $sqSize - 3.5;
+		border-radius: $radM;
+	}
+
+}
+.square{
+	width: $sqSize;
+	height: $sqSize;
+	border-radius: $radL;
+	margin: .7vw;
+	@include border(3px);
+	cursor: pointer;
+	@media screen and(min-width: 768px){
+		width: $sqSize/2.5;
+		height: $sqSize/2.5;
+		border-radius: $radM;
+	}
+}
+.green{
+	background: $green;
+	&:hover{
+		@include colorBright($green);
+	}
+}
+.red{
+	background: $red;
+	&:hover{
+		@include colorBright($red);
+	}
+}
+.yellow{
+	background: $yellow;
+	&:hover{
+		@include colorBright($yellow);
+	}
+}
+.blue{
+	background: $blue;
+	&:hover{
+		@include colorBright($blue);
+	}
+}
+//---glows-----//
+.greenGlow{
+	@include colorBright($green);
+}
+.redGlow{
+	@include colorBright($red);
+}
+.yellowGlow{
+	@include colorBright($yellow);
+}
+.blueGlow{
+	@include colorBright($blue);
+}
+//---steps---//
+.tableCounter{
+	display: flex;
+	flex-direction: row;
+	margin: 0 auto;
+	height: 8vw;
+	margin-top: 1vw;
+	align-items: center;
+	@media screen and(min-width: 768px){
+		height: 3vw;
+		height: 2.5;
+		margin-top: .3vw;
+	}
+}
+.counter{
+	width: 8vw;
+	height: 8vw;
+	background: $dark;
+	border-radius: $radS;
+	color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 5%;
+	@media screen and(min-width: 768px){
+		width: 3vw;
+		height: 2vw;
+		border-radius: $radS/2;
+	}
+}
+
+//---Controls----//
+.controls{
+	margin: 0 auto;
+	margin-top: 2vw;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	@media screen and(min-width: 768px){
+		flex-direction: row;
+		align-items: center;
+		margin-top: .2vw;
+
+	}
+}
+.button{
+	background: $beige;
+	border: none;
+	border-radius: $radM;
+	padding: 3vw;
+	font-size: 1.1rem;
+	color: #fff;
+	@include border(2px);
+	&:hover{
+		background-color: adjust-color($green,  $lightness:-15%);
+	}
+	&:active{
+		background-color: adjust-color($green,  $lightness:25%);
+	}
+	@media screen and(min-width:768px){
+		border-radius: $radS/2;
+		padding: 1vw;
+		margin: .5vw;
+		font-size: 1.5rem;
+	}
+}
+.start{
+	background: $green;
+	font-size: 1.6rem;
+	width: 30vw;
+	margin-bottom: 2vw;
+	@media screen and(min-width: 768px){
+		width: 10vw;
+		margin-bottom: 0;
+	}
+}
+.strict{
+	color: rgb(185,180,180);
+	//width: 15vw;
+	background: $darkGreen;
+	@media screen and(min-width: 768px){
+		width: 10vw;
+		margin-bottom: 0;
+	}
+
+}
