@@ -20,3 +20,15 @@ $borderColor: adjust-color($dark, $alpha:-0.5);
 @mixin colorBright($color){
   background: scale-color($color, $saturation: 100%, $lightness: 50%);
 }
+
+//animate the glows of the buttons
+@mixin glowSetup(){
+  animation-duration: 1s;
+  animation-name: glowAnim;
+  animation-iteration-count: 1;
+  animation-direction: alternate-reverse;
+}
+@mixin glowKeys($color) {
+  @keyframes glowAnim{ from{ background: $color} to{background: colorBright($color)} }
+
+}

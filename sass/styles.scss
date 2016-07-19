@@ -120,6 +120,9 @@ header h1{
 //---glows-----//
 .greenGlow{
 	@include colorBright($green);
+	//@include glowSetup();
+	//@include glowKeys($green);
+
 }
 .redGlow{
 	@include colorBright($red);
