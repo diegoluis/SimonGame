@@ -1,3 +1,4 @@
+//---colors--------//
 $green: rgb(74,171,153);
 $red: rgb(245,58,89);
 $blue: rgb(47,149,184);
@@ -5,10 +6,16 @@ $yellow: rgb(238,200,82);
 $dark:  rgb(28, 17, 14);
 $beige: rgb(243,231,189);
 $darkGreen: rgb(50,75,88);
+
+
+//sizes
 $radL: 5vw;
 $radM:2vw;
 $radS: 1vw;
 $sqSize: 38vw;
+
+//time
+$time: .5s;
 
 //mixins for the border of buttons
 $borderColor: adjust-color($dark, $alpha:-0.5);
@@ -21,14 +28,31 @@ $borderColor: adjust-color($dark, $alpha:-0.5);
   background: scale-color($color, $saturation: 100%, $lightness: 50%);
 }
 
-//animate the glows of the buttons
-@mixin glowSetup(){
-  animation-duration: 1s;
-  animation-name: glowAnim;
-  animation-iteration-count: 1;
-  animation-direction: alternate-reverse;
-}
-@mixin glowKeys($color) {
-  @keyframes glowAnim{ from{ background: $color} to{background: colorBright($color)} }
 
+//animate the glows of the buttons
+//keyframes for each color
+  @keyframes glowGreen{
+    10%{ background: $green}
+    50%{@include colorBright($green);}
+    90%{ background: $green}
+  }
+  @keyframes glowRed{
+    10%{ background: $red}
+    50%{@include colorBright($red);}
+    90%{ background: $red}
+  }
+  @keyframes glowYellow{
+    10%{ background: $yellow}
+    50%{@include colorBright($yellow);}
+    90%{ background: $yellow}
+  }
+  @keyframes glowBlue{
+    10%{ background: $blue}
+    50%{@include colorBright($blue);}
+    90%{ background: $blue}
+  }
+//mixin to pass the animation to the classes
+@mixin glowAnim($keyframes, $duration){
+  animation-duration: $duration;
+  animation-name: $keyframes;
 }

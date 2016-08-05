@@ -96,42 +96,40 @@ header h1{
 .green{
 	background: $green;
 	&:hover{
-		@include colorBright($green);
+		@include glowAnim(glowGreen, 1s);
 	}
 }
 .red{
 	background: $red;
+	transition: background .5s;
 	&:hover{
-		@include colorBright($red);
+		@include glowAnim(glowRed, 1s);
 	}
 }
 .yellow{
 	background: $yellow;
 	&:hover{
-		@include colorBright($yellow);
+		@include glowAnim(glowYellow, 1s);
 	}
 }
 .blue{
 	background: $blue;
 	&:hover{
-		@include colorBright($blue);
+		@include glowAnim(glowBlue, 1s);
 	}
 }
 //---glows-----//
 .greenGlow{
-	@include colorBright($green);
-	//@include glowSetup();
-	//@include glowKeys($green);
-
+	@include glowAnim(glowGreen, $time);
 }
 .redGlow{
-	@include colorBright($red);
+	@include glowAnim(glowRed, $time);
 }
 .yellowGlow{
-	@include colorBright($yellow);
+	@include glowAnim(glowYellow, $time);
 }
 .blueGlow{
-	@include colorBright($blue);
+	@include glowAnim(glowBlue, $time);
 }
 //---steps---//
 .tableCounter{
