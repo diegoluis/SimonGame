@@ -95,41 +95,41 @@ header h1{
 }
 .green{
 	background: $green;
-	&:hover{
-		@include glowAnim(glowGreen, 1s);
-	}
+	transition: background .1s;
+
 }
 .red{
 	background: $red;
-	transition: background .5s;
-	&:hover{
-		@include glowAnim(glowRed, 1s);
-	}
+	transition: background .1s;
+
 }
 .yellow{
 	background: $yellow;
-	&:hover{
-		@include glowAnim(glowYellow, 1s);
-	}
+	transition: background .1s;
+
 }
 .blue{
 	background: $blue;
-	&:hover{
-		@include glowAnim(glowBlue, 1s);
-	}
+	transition: background .1s;
+
+
 }
 //---glows-----//
 .greenGlow{
-	@include glowAnim(glowGreen, $time);
+	//@include glowAnim(glowGreen, $time);
+	@include colorBright($green);
 }
 .redGlow{
-	@include glowAnim(glowRed, $time);
+	//@include glowAnim(glowRed, $time);
+	@include colorBright($red);
 }
 .yellowGlow{
-	@include glowAnim(glowYellow, $time);
+	//@include glowAnim(glowYellow, $time);
+	@include colorBright($yellow);
 }
 .blueGlow{
-	@include glowAnim(glowBlue, $time);
+	//@include glowAnim(glowBlue, $time);
+	@include colorBright($blue);
 }
 //---steps---//
 .tableCounter{
@@ -208,6 +208,13 @@ header h1{
 		margin-bottom: 0;
 	}
 }
+.startDisabled{
+	background-color: shade($green, 60%);
+	color: rgb(108,108,107);
+	&:hover{
+		background-color: shade($green, 60%);
+	}
+}
 .strict{
 	color: rgb(185,180,180);
 	//width: 15vw;
@@ -216,5 +223,12 @@ header h1{
 		width: 10vw;
 		margin-bottom: 0;
 	}
+}
+.reset{
+	@extend .strict;
 
+	background: darken($red, 40);
+	@media screen and(max-width: 768px){
+		margin-top: 2vw;
+	}
 }
