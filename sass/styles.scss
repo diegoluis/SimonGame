@@ -64,6 +64,12 @@ header h1{
 	margin: 0 auto;
 }
 //--squares---//
+button{
+	border: none;
+	&:focus{
+		outline: none;
+	}
+}
 .squares{
 	display: flex;
 	flex-direction: row;
@@ -72,11 +78,15 @@ header h1{
 	justify-content: space-around;
 	background: $dark;
 	border-radius: $radL;
-	padding: 1.2vw 1vw 1.2vw 1vw;
+	//padding: 1.2vw 1vw 1.2vw 1vw;
+	padding: 1vw;
 	margin: 0 auto;
 	@media screen and(min-width: 768px){
 		width: $sqSize - 3.5;
 		border-radius: $radM;
+	}
+	@media screen and(max-width: 767px){
+		padding: 2vw;
 	}
 
 }
@@ -84,13 +94,21 @@ header h1{
 	width: $sqSize;
 	height: $sqSize;
 	border-radius: $radL;
-	margin: .7vw;
+	padding: 0;
+	//margin: .7vw;
+	//margin: 1vw .7vw 1vw .7vw;
+	margin-top: 1vw;
+	margin-bottom: 1vw;
+	//margin-bottom: 1vw;
 	@include border(3px);
 	cursor: pointer;
 	@media screen and(min-width: 768px){
 		width: $sqSize/2.5;
 		height: $sqSize/2.5;
 		border-radius: $radM;
+	}
+	@media screen and(max-width: 767px){
+		margin: 2.3vw;
 	}
 }
 .green{
@@ -111,9 +129,12 @@ header h1{
 .blue{
 	background: $blue;
 	transition: background .1s;
-
-
 }
+
+.yellow, .blue{
+	//margin-top: 1.3vw;
+}
+
 //---glows-----//
 .greenGlow{
 	//@include glowAnim(glowGreen, $time);
@@ -216,7 +237,7 @@ header h1{
 	}
 }
 .strict{
-	color: rgb(185,180,180);
+	color: rgb(255,255,255);
 	//width: 15vw;
 	background: $darkGreen;
 	@media screen and(min-width: 768px){
@@ -224,11 +245,23 @@ header h1{
 		margin-bottom: 0;
 	}
 }
+.strictOn{
+	@extend .strict;
+	background: rgb(255,65,5);
+	color: #fff;
+	&:hover{
+		background: rgb(255,65,5);
+		color: #fff;
+	}
+}
 .reset{
 	@extend .strict;
 
 	background: darken($red, 40);
-	@media screen and(max-width: 768px){
+	@media screen and(max-width: 767px){
 		margin-top: 2vw;
+	}
+	&:hover{
+		background: darken($red, 30);
 	}
 }
