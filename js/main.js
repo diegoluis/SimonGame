@@ -1,7 +1,6 @@
 /*
 
-- cuando la máquina está jugando no permitir que los botones se puedan presionar por el jugador (ya está con start)
--revisar el css (espacios, etc)
+
 //manejo de errores
 - hacer una secuencia especial cuando gane
 
@@ -82,61 +81,43 @@ blue.addEventListener("click", function(){playSound(audio4);});
 
 
 //activate/deactivate the buttons
-///NOT WORKING////
-function toggleButtons(buttons, state, color){
+function toggleButtons(buttons, state){
+  //deactivate or activate all the buttons
   for(var i = 0; i<buttons.length; i++){
       buttons[i].disabled = state;
   }
-  if(color ==! undefined){
-    color.disabled = false;
-  }
 }
-//toggleButtons(allButtons, true, "en compareLength");
-// en playByNumber identificar si el numero es de la maquina
+
 //---- reproduce automatically the array -------//
 timer = 1000;
 //associate each number with a button and a sound
 function playByNumber(number, player){
   increaseSpeed(timer);
+  //if the machine is playing deactivate the buttons if the human is playing, activate the buttons
+  if(player === "machine"){
+    toggleButtons(allButtons, true);
+  }else{
+    toggleButtons(allButtons, false);
+  }
   switch (number) {
     case 1:
       playSound(audio1);
       changeClasses(green, "greenGlow", timer);
-      if(player === "machine"){
-        toggleButtons(allButtons, true, green);
-      }else{
-        toggleButtons(allButtons, false);
-      }
 
       break;
     case 2:
       playSound(audio2);
       changeClasses(red, "redGlow", timer);
-      if(player === "machine"){
-        toggleButtons(allButtons, true, red);
-      }else{
-        toggleButtons(allButtons, false)
-      }
 
       break;
     case 3:
       playSound(audio3);
       changeClasses(yellow, "yellowGlow", timer);
-      if(player === "machine"){
-        toggleButtons(allButtons, true, yellow);
-      }else{
-        toggleButtons(allButtons, false)
-      }
 
       break;
     case 4:
       playSound(audio4);
       changeClasses(blue, "blueGlow", timer);
-      if(player === "machine"){
-        toggleButtons(allButtons, true, blue);
-      }else{
-        toggleButtons(allButtons, false);
-      }
 
       break;
   }
@@ -297,6 +278,3 @@ window.onload = function(){
     strict.classList.remove("strictOn");
   }
 };
-
-//bug con strict la página se recarga pero reproduce dos vece el primer numero
-//desctivado por defecto, solo se activa cuando está jugando el jugador

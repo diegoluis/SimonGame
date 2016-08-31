@@ -74,7 +74,7 @@ button{
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	width: 95%;
+	width: 86%;
 	justify-content: space-around;
 	background: $dark;
 	border-radius: $radL;
@@ -86,7 +86,7 @@ button{
 		border-radius: $radM;
 	}
 	@media screen and(max-width: 767px){
-		padding: 2vw;
+		padding: 2.1vw;
 	}
 
 }
@@ -97,8 +97,8 @@ button{
 	padding: 0;
 	//margin: .7vw;
 	//margin: 1vw .7vw 1vw .7vw;
-	margin-top: 1vw;
-	margin-bottom: 1vw;
+	margin-top: .85vw;
+	margin-bottom: .85vw;
 	//margin-bottom: 1vw;
 	@include border(3px);
 	cursor: pointer;
@@ -180,6 +180,7 @@ button{
 		width: 3vw;
 		height: 2vw;
 		border-radius: $radS/2;
+		padding: .2rem;
 	}
 }
 
