@@ -30,7 +30,7 @@ var audio4 = document.getElementById("s4");
 var audioErr = document.getElementById("sErr");
 //timer
 var timer = 500;
-var pause = 500;
+var pause = 0;
 // counter on the board
 var counterBoard = document.getElementById("counter");
 //variable to control the steps of the game
@@ -141,6 +141,48 @@ function changeClasses(nameId, nameClass, time){
 function boardCounter(counter){
   counterBoard.innerHTML = counter;
 }
+
+//group varios boardCounters for the error
+function boardError(){
+  boardCounter(" ");
+  window.setTimeout(function(){boardCounter("E");},100);
+  window.setTimeout(function(){boardCounter(" ");},50);
+  window.setTimeout(function(){boardCounter("!!");},500);
+}
+
+//when the human wins
+var numRestart = 0;
+function triumph(number){
+//  window.setTimeout(function(){
+
+      console.log(number);
+      window.setTimeout(function(){
+           playByNumber(number, machine);
+           number++;
+           numRestart++;
+           triumph(number);
+         },200);
+    if(number === 4){
+      console.log("vuelta " + number );
+      number = 1;
+      playByNumber(number, machine);
+      number++;
+      numRestart++;
+      triumph(number);
+      console.log("restart " + numRestart)
+
+    }
+    if(numRestart === 4){
+      reload(2000);
+    }
+  //}, 500)
+
+  //return reload(5000);
+
+}
+function reload(time){
+  window.setTimeout(function(){window.location.href =  window.location.href.split("?")[0];},time);
+}
 //a function to do the steps of the game
 
 function steps(){
@@ -173,12 +215,19 @@ function comparePlays(pushedBtn){
   //if the button equals the machine advance one position
   if(pushedBtn === gameMachine[loop]){
     loop++;
+    if(loop === 4){
+      /*gameMachine.length*/
+      //play a sequence of triumph
+        return triumph(1);
+
+    }
     //see if the cycle is finished
     compareLength();
   } else if(strictValue){
     //if strict is activated play error
+    boardError();
     playSoundErr();
-    //add parameter to url
+    //add parameter to url and reload
     if (url.indexOf('param=1') === -1){
        url += '?param=1';
     }else{
@@ -189,6 +238,8 @@ function comparePlays(pushedBtn){
   }else{
     //if not the same repeat the cycle and throw an error
     playSoundErr();
+    //show error in the Board Counter
+    boardError();
     loop = 0;
     window.setTimeout(function(){readGameMachine(counter);},pause);
   }
@@ -196,9 +247,10 @@ function comparePlays(pushedBtn){
 function compareLength(){
   //if loop less, continue comparing otherwise advance one step and play machine
   if(loop === counterMachine){
+    //advance one step in the game of the machine
     counterMachine++;
     loop = 0;
-    window.setTimeout(function(){readGameMachine(counter,toggleButtons(allButtons, false, "en compareLength set timeout"));},pause);
+    window.setTimeout(function(){readGameMachine(counter,toggleButtons(allButtons, false));},pause);
   }
 }
 
@@ -232,9 +284,9 @@ function increaseSpeed(time){
     return timerSpeed = timer;
   }
   if(counterMachine>=7 && counterMachine<12){
-    return timerSpeed = time/1.3;
+    return timerSpeed = time/1.4;
   } else if(counterMachine>=12){
-    return timerSpeed = time/1.6;
+    return timerSpeed = time/1.7;
   }
 }
 
@@ -261,15 +313,16 @@ reset.addEventListener("click", function(){
   window.location.href =  window.location.href.split("?")[0];
 
 });
-
+//when the page is loaded
 window.onload = function(){
-  toggleButtons(allButtons, true, "en onloadWindow");
+  //buttons deactivated
+  toggleButtons(allButtons, true);
+  //if reload because of strict mode
   if (url.indexOf('param=1') !== -1){
      createGMachine();
      strictValue = true;
      start.disabled = true;
      start.classList.add("startDisabled");
-     console.log(url);
   }
   //check if strict is active to color the button accordingly
   if(strictValue){
@@ -278,3 +331,7 @@ window.onload = function(){
     strict.classList.remove("strictOn");
   }
 };
+
+// efecto cuando gana
+//que el contador del tablero no vuelva a empezar cada vez
+//hacer que cuando llega a 20 el juego se pare
