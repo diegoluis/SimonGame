@@ -38,6 +38,8 @@ var counterMachine = 1;
 var counter = 0;
 //variable to control the internal steps of each loop
 var loop = 0;
+//control the end of the game
+var finalNumber = 20;
 //variable to control the strict mode
 var strictValue = false;
 //variables to control human and machine
@@ -140,6 +142,7 @@ function changeClasses(nameId, nameClass, time){
 //a function to modify the counter on the board
 function boardCounter(counter){
   counterBoard.innerHTML = counter;
+  return counter;
 }
 
 //group varios boardCounters for the error
@@ -153,9 +156,7 @@ function boardError(){
 //when the human wins
 var numRestart = 0;
 function triumph(number){
-//  window.setTimeout(function(){
-
-      console.log(number);
+  //do a sequence with the buttons
       window.setTimeout(function(){
            playByNumber(number, machine);
            number++;
@@ -163,26 +164,22 @@ function triumph(number){
            triumph(number);
          },200);
     if(number === 4){
-      console.log("vuelta " + number );
       number = 1;
       playByNumber(number, machine);
       number++;
       numRestart++;
       triumph(number);
-      console.log("restart " + numRestart)
-
     }
+  //reload the page after some cycles
     if(numRestart === 4){
-      reload(2000);
+      urlReload('param=2', 1500)
     }
-  //}, 500)
-
-  //return reload(5000);
-
 }
+/*
 function reload(time){
   window.setTimeout(function(){window.location.href =  window.location.href.split("?")[0];},time);
 }
+*/
 //a function to do the steps of the game
 
 function steps(){
@@ -215,7 +212,7 @@ function comparePlays(pushedBtn){
   //if the button equals the machine advance one position
   if(pushedBtn === gameMachine[loop]){
     loop++;
-    if(loop === 4){
+    if(loop === finalNumber){
       /*gameMachine.length*/
       //play a sequence of triumph
         return triumph(1);
@@ -228,13 +225,7 @@ function comparePlays(pushedBtn){
     boardError();
     playSoundErr();
     //add parameter to url and reload
-    if (url.indexOf('param=1') === -1){
-       url += '?param=1';
-    }else{
-       url += '?param=1';
-    }
-    //reload the page with a pause
-    window.setTimeout(function(){window.location.href = url;},1000);
+    urlReload('param=1', 1000);
   }else{
     //if not the same repeat the cycle and throw an error
     playSoundErr();
@@ -253,7 +244,7 @@ function compareLength(){
     window.setTimeout(function(){readGameMachine(counter,toggleButtons(allButtons, false));},pause);
   }
 }
-
+var counterLaps = counterMachine;
 //read the array from the machine and reproduce the buttons according to it
 function readGameMachine(counter){
   //iterate the function to traverse all the array
@@ -308,6 +299,14 @@ strict.addEventListener("click", function(){
     strict.classList.add("strictOn");
   }
 });
+
+//function to add parameter to url and reload page
+function urlReload(parameter, time){
+  url = window.location.href.split("?")[0];
+  url += '?'+parameter;
+  //reload the page with a pause
+  window.setTimeout(function(){window.location.href = url;},time);
+}
 //restart the game
 reset.addEventListener("click", function(){
   window.location.href =  window.location.href.split("?")[0];
@@ -323,6 +322,11 @@ window.onload = function(){
      strictValue = true;
      start.disabled = true;
      start.classList.add("startDisabled");
+  } else if(url.indexOf('param=2') !== -1){ //if reload because of winning
+    createGMachine();
+    strictValue = false;
+    start.disabled = true;
+    start.classList.add("startDisabled");
   }
   //check if strict is active to color the button accordingly
   if(strictValue){
@@ -332,6 +336,5 @@ window.onload = function(){
   }
 };
 
-// efecto cuando gana
+
 //que el contador del tablero no vuelva a empezar cada vez
-//hacer que cuando llega a 20 el juego se pare
