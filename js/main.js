@@ -1,10 +1,3 @@
-/*
-
-
-//manejo de errores
-- hacer una secuencia especial cuando gane
-
-*/
 //-----------variables-----------//
 var url = window.location.href;
 var gameMachine = [];
@@ -45,8 +38,6 @@ var strictValue = false;
 //variables to control human and machine
 var machine = "machine";
 var human = "human";
-//var to store a timeout
-//var timePause = window.setTimeout(function(){readGameMachine(counter);},pause);;
 //------------------------------//
 
 //create the random number and add it to an array
@@ -175,11 +166,7 @@ function triumph(number){
       urlReload('param=2', 1500)
     }
 }
-/*
-function reload(time){
-  window.setTimeout(function(){window.location.href =  window.location.href.split("?")[0];},time);
-}
-*/
+
 //a function to do the steps of the game
 
 function steps(){
@@ -335,6 +322,3 @@ window.onload = function(){
     strict.classList.remove("strictOn");
   }
 };
-
-
-//que el contador del tablero no vuelva a empezar cada vez
